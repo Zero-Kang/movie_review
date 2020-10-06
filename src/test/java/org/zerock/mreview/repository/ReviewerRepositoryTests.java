@@ -23,7 +23,10 @@ public class ReviewerRepositoryTests {
     public void insertReviewers() {
 
         IntStream.rangeClosed(1,100).forEach(i -> {
-            Reviewer reviewer = Reviewer.builder().nickname("reviewer"+i).build();
+            Reviewer reviewer = Reviewer.builder()
+                    .rid("r"+i)
+                    .pw("1111")
+                    .nickname("reviewer"+i).build();
             reviewerRepository.save(reviewer);
         });
     }
@@ -33,13 +36,12 @@ public class ReviewerRepositoryTests {
     @Test
     public void testDeleteReviewer() {
 
-        String nickname ="reviewer14";
+        String rid ="r1";
 
-        Reviewer reviewer = Reviewer.builder().nickname(nickname).build();
+        Reviewer reviewer = Reviewer.builder().rid(rid).build();
 
-
+        reviewerRepository.deleteById(rid);
         movieReviewRepository.deleteByReviewer(reviewer);
-        reviewerRepository.deleteById(nickname);
-
     }
+
 }

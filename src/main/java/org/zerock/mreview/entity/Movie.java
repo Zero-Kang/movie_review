@@ -27,6 +27,21 @@ public class Movie extends BaseEntity {
 
     private String file3;
 
+    public void changeTitle(String title){
+        this.title = title;
+    }
+
+    public void changeFile1(String file1) {
+        this.file1 = file1;
+    }
+
+    public void changeFile2(String file2) {
+        this.file2 = file2;
+    }
+
+    public void changeFile3(String file3) {
+        this.file3 = file3;
+    }
 }
 
 

@@ -25,4 +25,12 @@ public class MovieReview extends BaseEntity {
     private int grade;
 
     private String text;
+
+    public void changeText(String text){
+        this.text = text;
+    }
+
+    public void changeGrade(int grade){
+        this.grade = grade;
+    }
 }

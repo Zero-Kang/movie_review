@@ -14,5 +14,10 @@ import javax.persistence.Id;
 public class Reviewer  extends BaseEntity{
 
     @Id
+    private String rid;
+
+    private String pw;
+
     private String nickname;
+
 }

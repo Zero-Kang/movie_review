@@ -6,12 +6,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.mreview.entity.Movie;
 import org.zerock.mreview.entity.MovieReview;
 import org.zerock.mreview.entity.Reviewer;
 
-import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -31,8 +32,8 @@ public class MovieReviewRepositoryTests {
             Movie movie = Movie.builder().mno(mno).build();
 
             //리뷰어번호
-            String nickname = "reviewer" + ( (int)(Math.random()*100) + 1 );
-            Reviewer reviewer = Reviewer.builder().nickname(nickname).build();
+            String rid = "r" + ( (int)(Math.random()*100) + 1 );
+            Reviewer reviewer = Reviewer.builder().rid(rid).build();
 
             MovieReview movieReview = MovieReview.builder()
                     .movie(movie)
@@ -45,15 +46,13 @@ public class MovieReviewRepositoryTests {
         });
     }
 
-    @Test
-    public void getMovieReviews() {
 
-        Sort sort = Sort.by(Sort.Direction.ASC,"reviewnum");
-        PageRequest pageRequest = PageRequest.of(0,10,sort);
+    @Test
+    public void testGetMovieReviews() {
 
         Movie movie = Movie.builder().mno(100L).build();
 
-        Page<MovieReview> result = movieReviewRepository.findByMovie(movie, pageRequest);
+        List<MovieReview> result = movieReviewRepository.findByMovie(movie);
 
         result.forEach(movieReview -> {
 
